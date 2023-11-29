@@ -1,12 +1,34 @@
 import 'package:flutter/material.dart';
 
-class TransactionForm extends StatelessWidget {
-  final titleController = TextEditingController();
-  final valueController = TextEditingController();
-
+class TransactionForm extends StatefulWidget {
   final void Function(String, double) onSubmit;
 
-  TransactionForm({super.key, required this.onSubmit});
+  const TransactionForm({super.key, required this.onSubmit});
+
+  @override
+  State<TransactionForm> createState() => _TransactionFormState();
+}
+
+class _TransactionFormState extends State<TransactionForm> {
+  final titleController = TextEditingController();
+
+  final valueController = TextEditingController();
+
+  void _submitForm() {
+    final String title;
+    final double value;
+
+    if (titleController.text.isNotEmpty || valueController.text.isNotEmpty) {
+      title = titleController.text;
+      value = double.tryParse(valueController.text) ?? 0;
+    } else {
+      return;
+    }
+
+    if (title.isEmpty || value <= 0) return;
+
+    widget.onSubmit(title, value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +41,15 @@ class TransactionForm extends StatelessWidget {
             TextField(
               // onChanged: (newValue) => title = newValue,
               controller: titleController,
+              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(labelText: 'Title'),
             ),
             TextField(
               // onChanged: (newValue) => value = newValue,
               controller: valueController,
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              onSubmitted: (_) => _submitForm(),
               decoration: const InputDecoration(labelText: 'Value (R\$)'),
             ),
             Container(
@@ -31,9 +57,7 @@ class TransactionForm extends StatelessWidget {
               margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: TextButton(
                 onPressed: () {
-                  final title = titleController.text;
-                  final value = double.tryParse(valueController.text) ?? 0;
-                  onSubmit(title, value);
+                  _submitForm();
                 },
                 style: ButtonStyle(
                   padding: MaterialStateProperty.all(

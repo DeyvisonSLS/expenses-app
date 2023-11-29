@@ -1,40 +1,33 @@
-// ignore_for_file: prefer_const_constructors
-import 'package:expenses/components/transaction_user.dart';
+import 'package:expenses/components/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'home_page.dart';
 
 main() => runApp(const ExpensesApp());
 
-class ExpensesApp extends StatelessWidget {
+class ExpensesApp extends StatefulWidget {
   const ExpensesApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyHomePage(),
-    );
-  }
+  State<ExpensesApp> createState() => _ExpensesAppState();
 }
 
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
-
+class _ExpensesAppState extends State<ExpensesApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Expenses'),
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: const [
-          Card(
-            color: Colors.amber,
-            elevation: 3,
-            child: Text('Graphic'),
-          ),
-          TransactionUser(),
-        ],
+    return ChangeNotifierProvider<ThemeProvider>(
+      create: (_) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (_, model, __) {
+          return MaterialApp(
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            themeMode: model.themeMode,
+            home: const HomePage(),
+            debugShowCheckedModeBanner: false,
+          );
+        },
       ),
     );
   }
