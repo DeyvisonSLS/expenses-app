@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'home_page.dart';
+import 'package:intl/intl_standalone.dart'
+    if (dart.library.html) 'package:intl/intl_browser.dart';
 
-main() => runApp(const ExpensesApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await findSystemLocale();
+  runApp(const ExpensesApp());
+}
 
 class ExpensesApp extends StatefulWidget {
   const ExpensesApp({super.key});

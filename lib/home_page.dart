@@ -57,12 +57,12 @@ class _HomePageState extends State<HomePage> {
 
   bool _pressed = false;
 
-  _addTransaction(String title, double value) {
+  _addTransaction(String title, double value, DateTime dateSelected) {
     final newTransaction = Transaction(
       id: Random().nextDouble().toString(),
       title: title,
       value: value,
-      date: DateTime.now(),
+      date: dateSelected,
     );
 
     setState(() {
