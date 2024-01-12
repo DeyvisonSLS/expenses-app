@@ -20,30 +20,38 @@ class MyThemes {
   //
   // dark
   static final darkTheme = ThemeData(
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.red,
-    ),
-    colorScheme: const ColorScheme.dark(
-      primary: Colors.purple,
-      secondary: Colors.amber,
+    colorScheme: ColorScheme.dark(
+      primary: Colors.orange,
+      secondary: Colors.blue,
       background: Colors.black,
       brightness: Brightness.dark,
       outline: Colors.white,
+      surface: Colors.grey.shade900,
     ),
+    fontFamily: 'Quicksand',
   );
 
   // light
   static final lightTheme = ThemeData(
-    appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.blue,
-      foregroundColor: Colors.white,
-    ),
     colorScheme: const ColorScheme.light(
-      primary: Colors.blue,
-      secondary: Colors.yellow,
+      primary: Colors.purple,
+      secondary: Colors.orangeAccent,
       background: Colors.white,
       outline: Colors.black,
       brightness: Brightness.light,
+      surface: Colors.white,
+      onSurface: Colors.black,
+      onPrimary: Colors.white,
     ),
+    // Setting the font family of this ThemeData
+    fontFamily: 'Quicksand',
+    // Setting the title theme from ThemeData default of flutter
+    textTheme: ThemeData.light().textTheme.copyWith(
+          titleLarge: const TextStyle(
+            fontFamily: 'OpenSans',
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
   );
 }

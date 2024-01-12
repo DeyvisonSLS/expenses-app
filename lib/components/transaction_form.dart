@@ -11,7 +11,6 @@ class TransactionForm extends StatefulWidget {
 
 class _TransactionFormState extends State<TransactionForm> {
   final titleController = TextEditingController();
-
   final valueController = TextEditingController();
 
   void _submitForm() {
@@ -32,43 +31,40 @@ class _TransactionFormState extends State<TransactionForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 5,
-      child: Container(
-        margin: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              // onChanged: (newValue) => title = newValue,
-              controller: titleController,
-              onSubmitted: (_) => _submitForm(),
-              decoration: const InputDecoration(labelText: 'Title'),
-            ),
-            TextField(
-              // onChanged: (newValue) => value = newValue,
-              controller: valueController,
-              keyboardType:
-                  const TextInputType.numberWithOptions(decimal: true),
-              onSubmitted: (_) => _submitForm(),
-              decoration: const InputDecoration(labelText: 'Value (R\$)'),
-            ),
-            Container(
-              width: double.infinity,
-              margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-              child: TextButton(
-                onPressed: () {
-                  _submitForm();
-                },
-                style: ButtonStyle(
-                  padding: MaterialStateProperty.all(
-                    const EdgeInsets.all(16),
-                  ),
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          TextField(
+            // onChanged: (newValue) => title = newValue,
+            controller: titleController,
+            onSubmitted: (_) => _submitForm(),
+            decoration: const InputDecoration(labelText: 'Title'),
+          ),
+          TextField(
+            // onChanged: (newValue) => value = newValue,
+            controller: valueController,
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            onSubmitted: (_) => _submitForm(),
+            decoration: const InputDecoration(labelText: 'Value (R\$)'),
+          ),
+          Container(
+            width: double.infinity,
+            margin: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+            child: TextButton(
+              onPressed: () {
+                _submitForm();
+              },
+              style: ButtonStyle(
+                padding: MaterialStateProperty.all(
+                  const EdgeInsets.all(16),
                 ),
-                child: const Text('Add'),
               ),
-            )
-          ],
-        ),
+              child: const Text('Add'),
+            ),
+          )
+        ],
       ),
     );
   }
