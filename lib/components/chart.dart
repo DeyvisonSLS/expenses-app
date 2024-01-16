@@ -70,7 +70,9 @@ class Chart extends StatelessWidget {
               child: ChartBar(
                 label: tr['day'],
                 value: tr['value'],
-                percentage: (tr['value'] as double) / _weekTotalvalue,
+                percentage: _weekTotalvalue == 0
+                    ? 0
+                    : (tr['value'] as double) / _weekTotalvalue,
                 isToday: tr['day'] ==
                         DateFormat.E().format(DateTime.now()).toString()
                     ? true

@@ -85,11 +85,13 @@ class _TransactionFormState extends State<TransactionForm> {
                     if (value == null) {
                       return 'Please, select some date.';
                     }
+                    dateTimeSelected = value;
                     return null;
                   },
-                  // initialValue: DateTime.now(),
-                  mode: DateTimeFieldPickerMode.date,
+                  initialPickerDateTime: DateTime(2019),
+                  lastDate: DateTime.now(),
                   initialValue: DateTime.now(),
+                  mode: DateTimeFieldPickerMode.date,
                   onChanged: (DateTime? value) => dateTimeSelected = value,
                 ),
                 Container(

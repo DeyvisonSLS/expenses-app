@@ -16,32 +16,7 @@ class HomePage extends StatefulWidget {
 
 // All transactions
 class _HomePageState extends State<HomePage> {
-  final List<Transaction> _transactions = [
-    Transaction(
-      id: 't0',
-      title: 'Old bill',
-      value: 350.55,
-      date: DateTime.now().subtract(const Duration(days: 33)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'New bill',
-      value: 150.14,
-      date: DateTime.now().subtract(const Duration(days: 2)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'New bill',
-      value: 250.14,
-      date: DateTime.now().subtract(const Duration(days: 3)),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'New bill',
-      value: 500.14,
-      date: DateTime.now(),
-    ),
-  ];
+  final List<Transaction> _transactions = [];
 
   // Filtered transactions: Only the last week transactions
   List<Transaction> get _recentTransactions {
