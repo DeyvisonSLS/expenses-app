@@ -29,6 +29,7 @@ class MyThemes {
       surface: Colors.grey.shade900,
     ),
     fontFamily: 'Quicksand',
+    useMaterial3: true,
   );
 
   // light
@@ -53,5 +54,6 @@ class MyThemes {
             fontWeight: FontWeight.bold,
           ),
         ),
+    useMaterial3: true,
   );
 }
