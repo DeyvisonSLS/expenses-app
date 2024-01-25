@@ -56,31 +56,31 @@ class Chart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // groupedTransactions;
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      height: (MediaQuery.of(context).size.height -
+              Scaffold.of(context).appBarMaxHeight!.toDouble()) *
+          0.3,
       color: Theme.of(context).colorScheme.primary,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.from(groupedTransactions.reversed).map((tr) {
-            return Flexible(
-              fit: FlexFit.tight,
-              child: ChartBar(
-                label: tr['day'],
-                value: tr['value'],
-                percentage: _weekTotalvalue == 0
-                    ? 0
-                    : (tr['value'] as double) / _weekTotalvalue,
-                isToday: tr['day'] ==
-                        DateFormat.E().format(DateTime.now()).toString()
-                    ? true
-                    : false,
-              ),
-            );
-          }).toList(),
-        ),
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: List.from(groupedTransactions.reversed).map((tr) {
+          return Flexible(
+            fit: FlexFit.tight,
+            child: ChartBar(
+              label: tr['day'],
+              value: tr['value'],
+              percentage: _weekTotalvalue == 0
+                  ? 0
+                  : (tr['value'] as double) / _weekTotalvalue,
+              isToday:
+                  tr['day'] == DateFormat.E().format(DateTime.now()).toString()
+                      ? true
+                      : false,
+            ),
+          );
+        }).toList(),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class ChartBar extends StatelessWidget {
   final String label;
@@ -17,6 +18,7 @@ class ChartBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.max,
       children: [
         SizedBox(
           height: 20,
@@ -33,36 +35,38 @@ class ChartBar extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Container(
-            height: 75,
-            width: 10,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: isToday == true
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.onPrimary,
-                width: 2.0,
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Container(
+              height: 30,
+              width: 10,
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: isToday == true
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onPrimary,
+                  width: 2.0,
+                ),
+                borderRadius: BorderRadius.circular(8.0),
+                // color: const Color.fromARGB(255, 232, 232, 232),
               ),
-              borderRadius: BorderRadius.circular(8.0),
-              // color: const Color.fromARGB(255, 232, 232, 232),
-            ),
-            child: Stack(
-              alignment: AlignmentDirectional.bottomEnd,
-              children: [
-                FractionallySizedBox(
-                  heightFactor: percentage,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: isToday == true
-                          ? Theme.of(context).colorScheme.secondary
-                          : Theme.of(context).colorScheme.onPrimary,
+              child: Stack(
+                alignment: AlignmentDirectional.bottomEnd,
+                children: [
+                  FractionallySizedBox(
+                    heightFactor: percentage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isToday == true
+                            ? Theme.of(context).colorScheme.secondary
+                            : Theme.of(context).colorScheme.onPrimary,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -76,12 +80,17 @@ class ChartBar extends StatelessWidget {
                 : Theme.of(context).colorScheme.onPrimary,
           ),
         ),
-        if (isToday)
-          Icon(
-            Icons.arrow_drop_up,
-            size: 20,
-            color: Theme.of(context).colorScheme.secondary,
-          ),
+        isToday
+            ? Icon(
+                Icons.arrow_drop_up,
+                size: 20,
+                color: Theme.of(context).colorScheme.secondary,
+              )
+            : const Icon(
+                Icons.arrow_drop_up,
+                size: 20,
+                color: Colors.transparent,
+              ),
       ],
     );
   }

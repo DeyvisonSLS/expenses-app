@@ -18,7 +18,7 @@ class _TransactionFormState extends State<TransactionForm> {
 
   final _formKey = GlobalKey<FormState>();
 
-  void _submitForm() {
+  Future<void> _submitForm() async {
     final String title;
     final double value;
     final DateTime date;
@@ -100,11 +100,14 @@ class _TransactionFormState extends State<TransactionForm> {
                   child: TextButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        _submitForm();
-                        Fluttertoast.showToast(
-                          msg: "Transaction added!",
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.BOTTOM,
+                        _submitForm().then(
+                          (value) {
+                            return Fluttertoast.showToast(
+                              msg: "Transaction added!",
+                              toastLength: Toast.LENGTH_SHORT,
+                              gravity: ToastGravity.BOTTOM,
+                            );
+                          },
                         );
                       } else {
                         Fluttertoast.showToast(

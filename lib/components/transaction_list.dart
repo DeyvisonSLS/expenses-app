@@ -12,7 +12,9 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 420,
+      height: (MediaQuery.of(context).size.height -
+              Scaffold.of(context).appBarMaxHeight!.toDouble()) *
+          0.7,
       child: transactions.isEmpty
           ? Column(
               children: [
@@ -35,16 +37,24 @@ class TransactionList extends StatelessWidget {
                 ),
               ],
             )
-          : Padding(
-              padding: const EdgeInsets.all(16.0),
+          : Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: ListView.builder(
                 itemCount: transactions.length,
                 itemBuilder: (ctx, index) {
                   final tr = transactions[index];
-                  return TransactionCard(
-                    transaction: tr,
-                    onRemove: onRemove,
-                  );
+                  return index == 0
+                      ? Container(
+                          margin: const EdgeInsets.only(top: 16.0),
+                          child: TransactionCard(
+                            transaction: tr,
+                            onRemove: onRemove,
+                          ),
+                        )
+                      : TransactionCard(
+                          transaction: tr,
+                          onRemove: onRemove,
+                        );
                 },
               ),
             ),

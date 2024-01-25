@@ -2,7 +2,7 @@ import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-enum SampleItem { Details, Share, Delete }
+enum SampleItem { details, share, delete }
 
 class TransactionCard extends StatefulWidget {
   final Transaction transaction;
@@ -21,22 +21,18 @@ class TransactionCard extends StatefulWidget {
 class _TransactionCardState extends State<TransactionCard> {
   SampleItem? selectedMenu;
 
-  void _executeSelectedMenu() {
+  void _executeSelectedMenuAction() {
     switch (selectedMenu) {
-      case SampleItem.Details:
+      case SampleItem.details:
         break;
-      case SampleItem.Delete:
-        print('Remove callled');
+      case SampleItem.delete:
         setState(() {
-          print('Remove callled');
           widget.onRemove(widget.transaction.id);
         });
         break;
-      case SampleItem.Share:
-        // TODO: Handle this case.
+      case SampleItem.share:
         break;
       case null:
-        // TODO: Handle this case.
         break;
     }
   }
@@ -75,17 +71,16 @@ class _TransactionCardState extends State<TransactionCard> {
             onSelected: (SampleItem item) {
               setState(() {
                 selectedMenu = item;
-                _executeSelectedMenu();
-                print('selecteMenu selected!');
+                _executeSelectedMenuAction();
               });
             },
             itemBuilder: (context) => <PopupMenuEntry<SampleItem>>[
               const PopupMenuItem(
-                value: SampleItem.Details,
+                value: SampleItem.details,
                 child: Text('Details'),
               ),
               const PopupMenuItem(
-                value: SampleItem.Delete,
+                value: SampleItem.delete,
                 child: Text('Delete'),
               ),
             ],

@@ -1,6 +1,7 @@
 import 'package:expenses/components/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 import 'home_page.dart';
 import 'package:intl/intl_standalone.dart'
@@ -9,7 +10,8 @@ import 'package:intl/intl_standalone.dart'
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await findSystemLocale();
-  runApp(const ExpensesApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(const ExpensesApp()));
 }
 
 class ExpensesApp extends StatefulWidget {

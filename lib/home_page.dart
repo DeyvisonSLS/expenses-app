@@ -75,30 +75,34 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var appBar = AppBar(
+      title: const Text('My Expenses'),
+      backgroundColor: Theme.of(context).colorScheme.primary,
+      foregroundColor: Theme.of(context).colorScheme.onPrimary,
+      actions: [
+        // IconButton(
+        //   icon: const Icon(Icons.add),
+        //   onPressed: () => _openTransactionFormModal(context),
+        // ),
+        IconButton(
+          icon: _pressed == true
+              ? const Icon(Icons.dark_mode_outlined)
+              : const Icon(Icons.light_mode_outlined),
+          onPressed: () => _changeTheme(),
+        )
+      ],
+    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Expenses'),
-        backgroundColor: Theme.of(context).colorScheme.primary,
-        foregroundColor: Theme.of(context).colorScheme.onPrimary,
-        actions: [
-          // IconButton(
-          //   icon: const Icon(Icons.add),
-          //   onPressed: () => _openTransactionFormModal(context),
-          // ),
-          IconButton(
-            icon: _pressed == true
-                ? const Icon(Icons.dark_mode_outlined)
-                : const Icon(Icons.light_mode_outlined),
-            onPressed: () => _changeTheme(),
-          )
-        ],
-      ),
+      appBar: appBar,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(recentTransactions: List.from(_recentTransactions.reversed)),
+            Chart(
+              recentTransactions: List.from(_recentTransactions.reversed),
+            ),
             TransactionList(_transactions, _deleteTransaction),
           ],
         ),
