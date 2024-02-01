@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ChartBar extends StatelessWidget {
   final String label;
@@ -17,32 +16,35 @@ class ChartBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        SizedBox(
-          height: 20,
-          // fittedbox: makes inside element resize according to the parent's size
-          // which in case is the fit, or the maximum width fittedbox can stretch...
-          child: FittedBox(
-            child: Text(
-              '\$${value.toStringAsFixed(2)}',
-              style: TextStyle(
-                color: isToday
-                    ? Theme.of(context).colorScheme.secondary
-                    : Theme.of(context).colorScheme.onPrimary,
+    return LayoutBuilder(builder: (contex, constraint) {
+      return Column(
+        // mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            padding:
+                EdgeInsets.symmetric(horizontal: constraint.maxWidth * 0.1),
+            height: constraint.maxHeight * 0.15,
+            // fittedbox: makes inside element resize according to the parent's size
+            // which in case is the fit, or the maximum width fittedbox can stretch...
+            child: FittedBox(
+              child: Text(
+                '\$${value.toStringAsFixed(2)}',
+                style: TextStyle(
+                  color: isToday
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: Padding(
+          Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Container(
-              height: 30,
-              width: 10,
+              height: constraint.maxHeight * 0.45,
+              width: 15,
               clipBehavior: Clip.antiAlias,
               decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceVariant,
                 border: Border.all(
                   color: isToday == true
                       ? Theme.of(context).colorScheme.secondary
@@ -69,29 +71,34 @@ class ChartBar extends StatelessWidget {
               ),
             ),
           ),
-        ),
-        Text(
-          label,
-          style: TextStyle(
-            // fontStyle: FontStyle.italic,
-            fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-            color: isToday
-                ? Theme.of(context).colorScheme.secondary
-                : Theme.of(context).colorScheme.onPrimary,
-          ),
-        ),
-        isToday
-            ? Icon(
-                Icons.arrow_drop_up,
-                size: 20,
-                color: Theme.of(context).colorScheme.secondary,
-              )
-            : const Icon(
-                Icons.arrow_drop_up,
-                size: 20,
-                color: Colors.transparent,
+          SizedBox(
+            height: constraint.maxHeight * 0.15,
+            child: FittedBox(
+              child: Text(
+                label,
+                style: TextStyle(
+                  // fontStyle: FontStyle.italic,
+                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                  color: isToday
+                      ? Theme.of(context).colorScheme.secondary
+                      : Theme.of(context).colorScheme.onPrimary,
+                ),
               ),
-      ],
-    );
+            ),
+          ),
+          isToday
+              ? Icon(
+                  Icons.arrow_drop_up,
+                  size: constraint.maxHeight * 0.1,
+                  color: Theme.of(context).colorScheme.secondary,
+                )
+              : Icon(
+                  Icons.arrow_drop_up,
+                  size: constraint.maxHeight * 0.1,
+                  color: Colors.transparent,
+                ),
+        ],
+      );
+    });
   }
 }

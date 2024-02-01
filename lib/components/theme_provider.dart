@@ -24,9 +24,10 @@ class MyThemes {
       primary: Colors.orange,
       secondary: Colors.blue,
       background: Colors.black,
+      surfaceVariant: Colors.orange.shade700,
       brightness: Brightness.dark,
-      outline: Colors.white,
-      surface: Colors.grey.shade900,
+      // outline: Colors.white,
+      // surface: Colors.grey.shade900,
     ),
     fontFamily: 'Quicksand',
     useMaterial3: true,
@@ -34,9 +35,11 @@ class MyThemes {
 
   // light
   static final lightTheme = ThemeData(
-    colorScheme: const ColorScheme.light(
-      primary: Colors.purple,
-      secondary: Colors.orangeAccent,
+    colorScheme: ColorScheme.light(
+      primary: Colors.blue,
+      secondary: Colors.orange,
+      tertiary: Colors.yellow,
+      surfaceVariant: Colors.blue.shade600,
       background: Colors.white,
       outline: Colors.black,
       brightness: Brightness.light,

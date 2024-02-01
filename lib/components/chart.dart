@@ -63,8 +63,6 @@ class Chart extends StatelessWidget {
           0.3,
       color: Theme.of(context).colorScheme.primary,
       child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.start,
-        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.from(groupedTransactions.reversed).map((tr) {
           return Flexible(
             fit: FlexFit.tight,
