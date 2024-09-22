@@ -80,10 +80,6 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       actions: [
-        // IconButton(
-        //   icon: const Icon(Icons.add),
-        //   onPressed: () => _openTransactionFormModal(context),
-        // ),
         IconButton(
           icon: _pressed == true
               ? const Icon(Icons.dark_mode_outlined)
@@ -101,7 +97,7 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Chart(
-              recentTransactions: List.from(_recentTransactions.reversed),
+              recentTransactions: List.from(_recentTransactions),
             ),
             TransactionList(_transactions, _deleteTransaction),
           ],
@@ -112,7 +108,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation:
+          MediaQuery.of(context).orientation == Orientation.portrait
+              ? FloatingActionButtonLocation.centerFloat
+              : FloatingActionButtonLocation.endFloat,
     );
   }
 }

@@ -37,40 +37,39 @@ class ChartBar extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Container(
-              height: constraint.maxHeight * 0.45,
-              width: 15,
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.surfaceVariant,
-                border: Border.all(
-                  color: isToday == true
-                      ? Theme.of(context).colorScheme.secondary
-                      : Theme.of(context).colorScheme.onPrimary,
-                  width: 2.0,
-                ),
-                borderRadius: BorderRadius.circular(8.0),
-                // color: const Color.fromARGB(255, 232, 232, 232),
+          SizedBox(height: constraint.maxHeight * 0.05),
+          Container(
+            height: constraint.maxHeight * 0.50,
+            width: 15,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              border: Border.all(
+                color: isToday == true
+                    ? Theme.of(context).colorScheme.secondary
+                    : Theme.of(context).colorScheme.onPrimary,
+                width: 2.0,
               ),
-              child: Stack(
-                alignment: AlignmentDirectional.bottomEnd,
-                children: [
-                  FractionallySizedBox(
-                    heightFactor: percentage,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: isToday == true
-                            ? Theme.of(context).colorScheme.secondary
-                            : Theme.of(context).colorScheme.onPrimary,
-                      ),
+              borderRadius: BorderRadius.circular(8.0),
+              // color: const Color.fromARGB(255, 232, 232, 232),
+            ),
+            child: Stack(
+              alignment: AlignmentDirectional.bottomEnd,
+              children: [
+                FractionallySizedBox(
+                  heightFactor: percentage,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: isToday == true
+                          ? Theme.of(context).colorScheme.secondary
+                          : Theme.of(context).colorScheme.onPrimary,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
+          SizedBox(height: constraint.maxHeight * 0.05),
           SizedBox(
             height: constraint.maxHeight * 0.15,
             child: FittedBox(

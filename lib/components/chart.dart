@@ -58,7 +58,7 @@ class Chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      height: (MediaQuery.of(context).size.height -
+      height: (MediaQuery.sizeOf(context).height -
               Scaffold.of(context).appBarMaxHeight!.toDouble()) *
           0.3,
       color: Theme.of(context).colorScheme.primary,

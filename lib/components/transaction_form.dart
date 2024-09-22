@@ -88,7 +88,7 @@ class _TransactionFormState extends State<TransactionForm> {
                     dateTimeSelected = value;
                     return null;
                   },
-                  initialPickerDateTime: DateTime(2019),
+                  initialPickerDateTime: DateTime.now(),
                   lastDate: DateTime.now(),
                   initialValue: DateTime.now(),
                   mode: DateTimeFieldPickerMode.date,
@@ -118,7 +118,7 @@ class _TransactionFormState extends State<TransactionForm> {
                       }
                     },
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
+                      padding: WidgetStateProperty.all(
                         const EdgeInsets.all(16),
                       ),
                     ),

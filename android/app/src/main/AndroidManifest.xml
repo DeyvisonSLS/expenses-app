@@ -4,8 +4,8 @@
         android:label="expenses"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+        <!-- android:screenOrientation="portrait" (it goes inside activity parameters for setting the preferred screen orientation) -->
         <activity
-            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="true"
             android:launchMode="singleTop"
