@@ -1,4 +1,3 @@
-// import 'package:expenses/components/theme_provider.dart';
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:expenses/components/transaction_card.dart';
@@ -14,27 +13,33 @@ class TransactionList extends StatelessWidget {
     return SizedBox(
       height: (MediaQuery.of(context).size.height -
               Scaffold.of(context).appBarMaxHeight!.toDouble()) *
-          0.7,
+          0.75,
       child: transactions.isEmpty
-          ? Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Text(
-                    'Nenhuma transação cadastrada.',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
-                Expanded(
-                  child: Image.asset(
-                    'assets/images/waiting.png',
-                    fit: BoxFit.cover,
-                    opacity: Theme.of(context).brightness == Brightness.light
-                        ? const AlwaysStoppedAnimation(0.25)
-                        : const AlwaysStoppedAnimation(0.50),
-                  ),
-                ),
-              ],
+          ? LayoutBuilder(
+              builder: (ctx, constraints) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(32.0),
+                      child: Text(
+                        'Nenhuma transação cadastrada.',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                    SizedBox(
+                      height: constraints.maxHeight * 0.4,
+                      child: Image.asset(
+                        'assets/images/waiting.png',
+                        fit: BoxFit.cover,
+                        opacity:
+                            Theme.of(context).brightness == Brightness.light
+                                ? const AlwaysStoppedAnimation(0.25)
+                                : const AlwaysStoppedAnimation(0.50),
+                      ),
+                    ),
+                  ],
+                );
+              },
             )
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),

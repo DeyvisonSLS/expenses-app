@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 // All transactions
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [];
+  late bool _showChart = false;
 
   // Filtered transactions: Only the last week transactions
   List<Transaction> get _recentTransactions {
@@ -75,8 +76,18 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+
     var appBar = AppBar(
-      title: const Text('My Expenses'),
+      title: Text(
+        'My Expenses',
+        style: TextStyle(
+          // The scale of the user have set on accessibility options on his device multiplied by 10
+          // The new textScalerOf now implements the new non-linear scaleFactor
+          fontSize: 18 * MediaQuery.textScalerOf(context).scale(1),
+        ),
+      ),
       backgroundColor: Theme.of(context).colorScheme.primary,
       foregroundColor: Theme.of(context).colorScheme.onPrimary,
       actions: [
@@ -96,10 +107,65 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Chart(
-              recentTransactions: List.from(_recentTransactions),
-            ),
-            TransactionList(_transactions, _deleteTransaction),
+            if (isLandscape && _recentTransactions.isNotEmpty)
+              Container(
+                padding: const EdgeInsets.all(4),
+                color: Theme.of(context).colorScheme.primary,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      _showChart == false
+                          ? 'Exibir Gráfico'
+                          : 'Esconder Gráfico',
+                      style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
+                      child: Switch(
+                        value: _showChart,
+                        onChanged: (value) {
+                          setState(() {
+                            _showChart = value;
+                          });
+                        },
+                        inactiveTrackColor:
+                            Theme.of(context).colorScheme.primary,
+                        activeColor: Theme.of(context).colorScheme.onPrimary,
+                        thumbColor: WidgetStateProperty.resolveWith<Color?>(
+                            (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return Theme.of(context).colorScheme.primary;
+                          } else {
+                            return Theme.of(context).colorScheme.surface;
+                          }
+                        }),
+                        inactiveThumbColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        trackOutlineColor:
+                            WidgetStateProperty.resolveWith<Color?>(
+                                (Set<WidgetState> states) {
+                          if (states.contains(WidgetState.selected)) {
+                            return null;
+                          } else {
+                            return Theme.of(context).colorScheme.onPrimary;
+                          }
+                        }),
+                        activeTrackColor: Theme.of(context).colorScheme.surface,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            if (_showChart || !isLandscape && _recentTransactions.isNotEmpty)
+              Chart(
+                recentTransactions: List.from(_recentTransactions),
+              ),
+            if (!_showChart || isLandscape)
+              TransactionList(_transactions, _deleteTransaction),
           ],
         ),
       ),

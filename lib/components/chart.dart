@@ -60,7 +60,7 @@ class Chart extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       height: (MediaQuery.sizeOf(context).height -
               Scaffold.of(context).appBarMaxHeight!.toDouble()) *
-          0.3,
+          0.25,
       color: Theme.of(context).colorScheme.primary,
       child: Row(
         children: List.from(groupedTransactions.reversed).map((tr) {

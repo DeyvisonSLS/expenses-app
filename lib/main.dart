@@ -1,8 +1,6 @@
 import 'package:expenses/components/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:flutter/services.dart';
-
 import 'home_page.dart';
 
 // Import standalone internationalization, but if the platform running is web, import lib for browser internationalization
@@ -37,6 +35,11 @@ class _ExpensesAppState extends State<ExpensesApp> {
       create: (_) => ThemeProvider(),
       child: Consumer<ThemeProvider>(
         builder: (_, themeProvider, __) {
+          // A way of setting of the preferred rotation on building
+          // Different of the way of setting it in gradle settings, which do it
+          // SystemChrome.setPreferredOrientations([
+          //   DeviceOrientation.portraitUp,
+          // ]);
           return MaterialApp(
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
