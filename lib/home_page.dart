@@ -57,9 +57,21 @@ class _HomePageState extends State<HomePage> {
   _openTransactionFormModal(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      builder: (_) {
-        return TransactionForm(
-          onSubmit: _addTransaction,
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TransactionForm(
+                onSubmit: _addTransaction,
+              ),
+            ],
+          ),
         );
       },
     );
