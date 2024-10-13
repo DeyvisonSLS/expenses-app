@@ -188,8 +188,7 @@ class _HomePageState extends State<HomePage> {
               Chart(
                 recentTransactions: List.from(_recentTransactions),
               ),
-            if (!_showChart || isLandscape)
-              TransactionList(_transactions, _deleteTransaction),
+            TransactionList(_transactions, _deleteTransaction),
           ],
         ),
       ),
