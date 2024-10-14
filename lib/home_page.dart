@@ -7,6 +7,8 @@ import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+bool showChart = false;
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -17,7 +19,6 @@ class HomePage extends StatefulWidget {
 // All transactions
 class _HomePageState extends State<HomePage> {
   final List<Transaction> _transactions = [];
-  late bool _showChart = false;
 
   // Filtered transactions: Only the last week transactions
   List<Transaction> get _recentTransactions {
@@ -105,13 +106,13 @@ class _HomePageState extends State<HomePage> {
       actions: [
         if (isLandscape && _recentTransactions.isNotEmpty)
           IconButton(
-            icon: _showChart
+            icon: showChart
                 ? const Icon(Icons.hide_source)
                 : const Icon(Icons.bar_chart_outlined),
             onPressed: () {
               // toggle true or false
               setState(() {
-                _showChart = !_showChart ? true : false;
+                showChart = !showChart ? true : false;
               });
             },
           ),
@@ -184,7 +185,7 @@ class _HomePageState extends State<HomePage> {
             //       ],
             //     ),
             //   ),
-            if (_showChart || !isLandscape && _recentTransactions.isNotEmpty)
+            if (showChart || !isLandscape && _recentTransactions.isNotEmpty)
               Chart(
                 recentTransactions: List.from(_recentTransactions),
               ),
@@ -197,10 +198,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Theme.of(context).colorScheme.secondary,
         child: const Icon(Icons.add),
       ),
-      floatingActionButtonLocation:
-          MediaQuery.of(context).orientation == Orientation.portrait
-              ? FloatingActionButtonLocation.centerFloat
-              : FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

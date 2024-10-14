@@ -1,6 +1,7 @@
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:expenses/components/transaction_card.dart';
+import 'package:expenses/home_page.dart';
 
 class TransactionList extends StatelessWidget {
   final List<Transaction> transactions;
@@ -11,9 +12,12 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: (MediaQuery.of(context).size.height -
-              Scaffold.of(context).appBarMaxHeight!.toDouble()) *
-          0.75,
+      height: showChart
+          ? (MediaQuery.of(context).size.height -
+                  Scaffold.of(context).appBarMaxHeight!.toDouble()) *
+              0.75
+          : (MediaQuery.of(context).size.height -
+              Scaffold.of(context).appBarMaxHeight!.toDouble()),
       child: transactions.isEmpty
           ? LayoutBuilder(
               builder: (ctx, constraints) {
@@ -48,6 +52,7 @@ class TransactionList extends StatelessWidget {
                 itemBuilder: (ctx, index) {
                   final tr = transactions[index];
                   return index == 0
+                      // When it's the first item, we instantiate a card with a margin at the top
                       ? Container(
                           margin: const EdgeInsets.only(top: 16.0),
                           child: TransactionCard(

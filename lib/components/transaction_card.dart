@@ -39,6 +39,8 @@ class _TransactionCardState extends State<TransactionCard> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLargeScreen = MediaQuery.of(context).size.width > 500;
+
     return Card(
       elevation: 2,
       surfaceTintColor: Colors.white,
@@ -66,25 +68,41 @@ class _TransactionCardState extends State<TransactionCard> {
             style: Theme.of(context).textTheme.titleLarge,
           ),
           subtitle: Text(DateFormat('dd/MM/y').format(widget.transaction.date)),
-          trailing: PopupMenuButton<SampleItem>(
-            initialValue: selectedMenu,
-            onSelected: (SampleItem item) {
-              setState(() {
-                selectedMenu = item;
-                _executeSelectedMenuAction();
-              });
-            },
-            itemBuilder: (context) => <PopupMenuEntry<SampleItem>>[
-              const PopupMenuItem(
-                value: SampleItem.details,
-                child: Text('Details'),
-              ),
-              const PopupMenuItem(
-                value: SampleItem.delete,
-                child: Text('Delete'),
-              ),
-            ],
-          ),
+          trailing: isLargeScreen
+              ? Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const IconButton(
+                        onPressed: null, icon: Icon(Icons.edit_outlined)),
+                    IconButton(
+                        color: Colors.red,
+                        onPressed: () {
+                          setState(() {
+                            widget.onRemove(widget.transaction.id);
+                          });
+                        },
+                        icon: const Icon(Icons.delete_outline))
+                  ],
+                )
+              : PopupMenuButton<SampleItem>(
+                  initialValue: selectedMenu,
+                  onSelected: (SampleItem item) {
+                    setState(() {
+                      selectedMenu = item;
+                      _executeSelectedMenuAction();
+                    });
+                  },
+                  itemBuilder: (context) => <PopupMenuEntry<SampleItem>>[
+                    const PopupMenuItem(
+                      value: SampleItem.details,
+                      child: Text('Details'),
+                    ),
+                    const PopupMenuItem(
+                      value: SampleItem.delete,
+                      child: Text('Delete'),
+                    ),
+                  ],
+                ),
         ),
       ),
     );
