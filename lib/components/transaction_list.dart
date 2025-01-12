@@ -47,25 +47,34 @@ class TransactionList extends StatelessWidget {
             )
           : Container(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: ListView.builder(
-                itemCount: transactions.length,
-                itemBuilder: (ctx, index) {
-                  final tr = transactions[index];
-                  return index == 0
-                      // When it's the first item, we instantiate a card with a margin at the top
-                      ? Container(
-                          margin: const EdgeInsets.only(top: 16.0),
-                          child: TransactionCard(
-                            transaction: tr,
-                            onRemove: onRemove,
-                          ),
-                        )
-                      : TransactionCard(
-                          transaction: tr,
-                          onRemove: onRemove,
-                        );
-                },
+              child: ListView(
+                children: transactions.map((tr) {
+                  return TransactionCard(
+                    transaction: tr,
+                    onRemove: onRemove,
+                    key: ValueKey(tr.id),
+                  );
+                }).toList(),
               ),
+              // ListView.builder(
+              //   itemCount: transactions.length,
+              //   itemBuilder: (ctx, index) {
+              //     final tr = transactions[index];
+              //     return index == 0
+              //         // When it's the first item, we instantiate a card with a margin at the top
+              //         ? Container(
+              //             margin: const EdgeInsets.only(top: 16.0),
+              //             child: TransactionCard(
+              //               transaction: tr,
+              //               onRemove: onRemove,
+              //             ),
+              //           )
+              //         : TransactionCard(
+              //             transaction: tr,
+              //             onRemove: onRemove,
+              //           );
+              //   },
+              // ),
             ),
     );
   }

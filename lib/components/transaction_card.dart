@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:expenses/models/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -9,10 +11,10 @@ class TransactionCard extends StatefulWidget {
   final void Function(int) onRemove;
 
   const TransactionCard({
-    super.key,
+    required Key key,
     required this.transaction,
     required this.onRemove,
-  });
+  }) : super(key: key);
 
   @override
   State<TransactionCard> createState() => _TransactionCardState();
@@ -20,6 +22,26 @@ class TransactionCard extends StatefulWidget {
 
 class _TransactionCardState extends State<TransactionCard> {
   SampleItem? selectedMenu;
+
+  static const colors = [
+    Colors.red,
+    Colors.blue,
+    Colors.green,
+    Colors.purple,
+    Colors.orange,
+    Colors.pink,
+    Colors.teal,
+  ];
+
+  late Color _backgroundColor;
+
+  @override
+  void initState() {
+    super.initState();
+
+    int i = Random().nextInt(7);
+    _backgroundColor = colors[i];
+  }
 
   void _executeSelectedMenuAction() {
     switch (selectedMenu) {
@@ -55,6 +77,7 @@ class _TransactionCardState extends State<TransactionCard> {
         ),
         child: ListTile(
           leading: CircleAvatar(
+            backgroundColor: _backgroundColor,
             radius: 30,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
