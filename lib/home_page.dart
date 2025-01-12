@@ -132,59 +132,6 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // if (isLandscape && _recentTransactions.isNotEmpty)
-            //   Container(
-            //     padding: const EdgeInsets.all(4),
-            //     color: Theme.of(context).colorScheme.primary,
-            //     child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.end,
-            //       children: [
-            //         Text(
-            //           _showChart == false
-            //               ? 'Exibir Gráfico'
-            //               : 'Esconder Gráfico',
-            //           style: TextStyle(
-            //             color: Theme.of(context).colorScheme.onPrimary,
-            //             fontWeight: FontWeight.bold,
-            //           ),
-            //         ),
-            //         Padding(
-            //           padding: const EdgeInsets.fromLTRB(4, 0, 0, 0),
-            //           child: Switch(
-            //             value: _showChart,
-            //             onChanged: (value) {
-            //               setState(() {
-            //                 _showChart = value;
-            //               });
-            //             },
-            //             inactiveTrackColor:
-            //                 Theme.of(context).colorScheme.primary,
-            //             activeColor: Theme.of(context).colorScheme.onPrimary,
-            //             thumbColor: WidgetStateProperty.resolveWith<Color?>(
-            //                 (Set<WidgetState> states) {
-            //               if (states.contains(WidgetState.selected)) {
-            //                 return Theme.of(context).colorScheme.primary;
-            //               } else {
-            //                 return Theme.of(context).colorScheme.surface;
-            //               }
-            //             }),
-            //             inactiveThumbColor:
-            //                 Theme.of(context).colorScheme.onPrimary,
-            //             trackOutlineColor:
-            //                 WidgetStateProperty.resolveWith<Color?>(
-            //                     (Set<WidgetState> states) {
-            //               if (states.contains(WidgetState.selected)) {
-            //                 return null;
-            //               } else {
-            //                 return Theme.of(context).colorScheme.onPrimary;
-            //               }
-            //             }),
-            //             activeTrackColor: Theme.of(context).colorScheme.surface,
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //   ),
             if (showChart || !isLandscape && _recentTransactions.isNotEmpty)
               Chart(
                 recentTransactions: List.from(_recentTransactions),
